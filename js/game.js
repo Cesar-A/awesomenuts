@@ -7,7 +7,7 @@ var game = {
 		// score
 		score : 0
 	},
-	
+	  
 	
 	// Run on page load.
 	"onload" : function () {
