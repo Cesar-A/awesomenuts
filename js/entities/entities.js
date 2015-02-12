@@ -138,7 +138,7 @@ game.PlayerEntity = me.Entity.extend({
 			}
 			//checks if the current animation is attack
 			if(this.renderable.isCurrentAnimation("attack") && this.now-this.lastHit >= 1000){
-				cosole.log("tower Hit");
+				console.log("tower Hit");
 				this.lastHit = this.now;
 				//character dies
 				response.b.loseHealth();
