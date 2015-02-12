@@ -13,7 +13,7 @@
         <link rel="apple-touch-icon" sizes="152x152" href="icons/touch-icon-ipad-retina-152x152.png">
 	</head>
 	<body>
-		<!-- hi -->
+		<!-- Canvas placeholder -->
 		<div id="screen"></div>
 
 		<!-- melonJS Library -->
