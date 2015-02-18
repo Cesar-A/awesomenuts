@@ -116,7 +116,7 @@ game.PlayerEntity = me.Entity.extend({
 			var xdif = this.pos.x - response.b.pos.x;
  			
  			//checks to see when character collides with enemy base
-			console.log("xdif " + xdif + "ydif " + ydif);
+			console.log("xdif " + "xdif" + "ydif " + "ydif");
 
 			//jumping through the top of the enemy base
 			if(ydif<-40 && xdif< 70 && xdif>-35){
@@ -311,7 +311,6 @@ game.EnemyCreep = me.Entity.extend({
 		return true;
 
 	},
-
 	//handels collisons with the player
 	//any lines of code that deal with the collisions above get sent down here and passed through
 	collideHandler: function(response) {
