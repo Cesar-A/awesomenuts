@@ -27,17 +27,17 @@ game.resources = [
 	 * {name: "example01", type: "tmx", src: "data/map/example01.json"},
  	 */
  	 // loads level01 
- 	 {name: "level01", type: "tmx", src: "data/map/test.tmx"},
+ 	 {name: "level1", type: "tmx", src: "data/map/level1.tmx"},
 	/* Background music. 
 	 * @example
 	 * {name: "example_bgm", type: "audio", src: "data/bgm/"},
 	 */
-	 {name: "Zelda Main Theme Song", type: "audio", src: "data/bgm/"},	
+	 //{name: "Zelda Main Theme Song", type: "audio", src: "data/bgm/"},	
 
 	/* Sound effects. 
 	 * @example
 	 * {name: "example_sfx", type: "audio", src: "data/sfx/"}
 	 */
-	 {name: "jump", type: "audio", src: "data/sfx/"},
-	 {name: "stomp", type: "audio", src: "data/sfx/"}
+	 //{name: "jump", type: "audio", src: "data/sfx/"},
+	 //{name: "stomp", type: "audio", src: "data/sfx/"}
 ];

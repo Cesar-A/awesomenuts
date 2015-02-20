@@ -170,7 +170,7 @@ game.PlayerEntity = me.Entity.extend({
 			//uses the global variable that helps the player loose health
 		    //variable located in game.js
 			if(this.renderable.isCurrentAnimation("attack") && this.now-this.lastHit >= game.data.playerAttackTimer){
-				cosole.log("tower Hit");
+				console.log("tower Hit");
 				this.lastHit = this.now;
 				//character dies/looses health when the player attacks the creep more than a certain number of attacks
 				response.b.loseHealth(game.data.playerAttack);
@@ -199,7 +199,7 @@ game.PlayerEntity = me.Entity.extend({
 			}
 			//uses the global variable that helps the player loose health
 			//variable located in game.js
-			if(this.renderable.isCurrentAnimation("attack") && this.now-this.lastHit >= game.data.playerAttackTimer
+			if(this.renderable.isCurrentAnimation("attack") && this.now-this.lastHit >= 1000
 				//checks the absolute value of the y and x difference
 				&& (Math.abs(ydif) <=40) && 
 				(((xdif>0) && this.facing==="left") || ((xdif<0) && this.facing==="right"))
@@ -208,7 +208,7 @@ game.PlayerEntity = me.Entity.extend({
 				this.lastHit = this.now;
 				//the player dies or looses health if it is attacking for too long
 				//timer
-				response.b.loseHealth(game.data.playerAttack);
+				response.b.loseHealth(1);
 			}
 		}
 	}
@@ -369,7 +369,7 @@ game.EnemyCreep = me.Entity.extend({
 		//lets us know what the creeps health is
 		console.log(this.health);
 		//if statement for loose health
-		if(this.health <= 0){
+		if(this.health <=0){
 			me.game.world.removeChild(this);
 		}
 
