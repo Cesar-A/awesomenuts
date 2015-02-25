@@ -101,7 +101,7 @@ game.PlayerEntity = me.Entity.extend({
 				// from the the first animation, not wherever we left off when we
 				// switched to another animation
 				//this.renderable.setCurrentAnimationFrame();
-				me.audio.play("jump");
+				//me.audio.play("jump");
 			}
 		}
 		//checks if character is moving
@@ -208,7 +208,7 @@ game.PlayerEntity = me.Entity.extend({
 				this.lastHit = this.now;
 				//the player dies or looses health if it is attacking for too long
 				//timer
-				response.b.loseHealth(1);
+				response.b.loseHealth(10);
 			}
 		}
 	}
