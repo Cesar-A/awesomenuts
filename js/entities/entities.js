@@ -13,7 +13,7 @@ game.PlayerEntity = me.Entity.extend({
 			this.renderable.setCurrentAnimation("idle");
 	},
 
-	setSuper: function(){
+	setSuper: function(x,y){
 		this._super(me.Entity, 'init', [x, y, {
 				image: "player",
 				width: 64,
@@ -54,8 +54,8 @@ game.PlayerEntity = me.Entity.extend({
 
 	update: function(delta){
 		this.now = new Date().getTime();
-		this.dead = checkIfDead();
-		this.checkKeyPressedAndMoved();
+		this.dead = this.checkIfDead();
+		this.checkKeyPressesAndMoved();
 		this.setAnimation();
 		me.collision.check(this, true, this.collideHandler.bind(this), true);
 		this.body.update(delta);
@@ -73,8 +73,10 @@ game.PlayerEntity = me.Entity.extend({
 
 		checkKeyPressesAndMoved: function() {
 			if(me.input.isKeyPressed("right")){
+				this.moveRight();
+			}
 
-			}else if (me.input.isKeyPressed("left")) {
+			else if (me.input.isKeyPressed("left")) {
 				this.moveLeft();
 			}else{
 				this.body.vel.x = 0;
@@ -83,7 +85,7 @@ game.PlayerEntity = me.Entity.extend({
 			if(me.input.isKeyPressed("jump") && !this.body.jumping && !this.body.falling) {
 				this.jump();
 			}
-
+			
 			this.attacking = me.input.isKeyPressed("attack")
 		},
 
@@ -107,7 +109,7 @@ game.PlayerEntity = me.Entity.extend({
 		jump: function() {
 			this.body.jumping = true;
 			this.body.vel.y -= this.body.accel.y * me.timer.tick;
-		}
+		},
 
 		setAnimation: function() {
 			if(this.attacking) {
@@ -128,7 +130,7 @@ game.PlayerEntity = me.Entity.extend({
 			}else if(!this.renderable.isCurrentAnimation("attack")) {
 				this.renderable.setCurrentAnimation("idle");
 			}
-		}
+		},
 
 		loseHealth: function(damage) {
 			this.health = this.health - damage;
@@ -138,13 +140,13 @@ game.PlayerEntity = me.Entity.extend({
 			if(response.b.type==='EnemyBaseEntity'){
 				this.collideWithEnemyBase(response);
 			}else if(response.b.type==='EnemyCreep'){
-				this.collideWithEnemy(response);
+				this.collideWithEnemyCreep(response);
 			}
 		},
 
 		collideWithEnemyBase: function() {
 				var ydif = this.pos.y - response.b.pos.y;
-				var xdif = this.pos.x. response.b.pos.x;
+				var xdif = this.pos.x + response.b.pos.x;
 				// positions of both
 
 				if(ydif<-40 && xdif< 70 && xdif>-35){
@@ -170,9 +172,9 @@ game.PlayerEntity = me.Entity.extend({
 
 				this.stopMovement(xdif);
 
-				if(this.checkAttack(xdif, ydif) {
+				if(this.checkAttack(xdif, ydif)) {
 					this.hitCreep(response);
-				};
+				}
 
 		},
 
