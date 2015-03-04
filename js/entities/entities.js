@@ -201,15 +201,15 @@ game.PlayerEntity = me.Entity.extend({
 		return false;
 	},
 
-	//hitCreep: function() {
-	//	if(response.b.health <= game.data.playerAttack) {
+	hitCreep: function() {
+		if(response.b.health <= game.data.playerAttack) {
 						// adds one gold for a creep kill
-	//					game.data.gold += 1;
-	//					console.log("Current gold:" + game.data.gold);
-		//			}
+						game.data.gold += 1;
+						console.log("Current gold:" + game.data.gold);
+					}
 
-	//				response.b.loseHealth(game.data.playerAttack);
-	//}
+					response.b.loseHealth(game.data.playerAttack);
+	}
 });
 
 
