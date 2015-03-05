@@ -143,9 +143,9 @@ game.PlayerEntity = me.Entity.extend({
 			}
 		},
 
-		collideWithEnemyBase: function() {
+		collideWithEnemyBase: function(response) {
 				var ydif = this.pos.y - response.b.pos.y;
-				var xdif = this.pos.x + response.b.pos.x;
+				var xdif = this.pos.x - response.b.pos.x;
 				// positions of both
 
 				if(ydif<-40 && xdif< 70 && xdif>-35){
@@ -211,41 +211,3 @@ game.PlayerEntity = me.Entity.extend({
 					response.b.loseHealth(game.data.playerAttack);
 	}
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
