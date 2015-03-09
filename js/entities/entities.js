@@ -292,9 +292,12 @@ game.PlayerEntity = me.Entity.extend({
 		//uses the global variable that helps the player loose health
 			//variable located in game.js
 			if(this.renderable.isCurrentAnimation("attack") && this.now-this.lastHit >= game.data.playerAttackTimer
+				//if(this.renderable.isCurrentAnimation("attack") && this.now-this.lastHit >= game.data.playerAttackTimer
 				//checks the absolute value of the y and x difference
 				&& (Math.abs(ydif) <=40) && 
 				(((xdif>0) && this.facing==="left") || ((xdif<0) && this.facing==="right"))
+				//&& (Math.abs(ydif) <=40) && 
+				//(((xdif>0) && this.facing==="left") || ((xdif<0) && this.facing==="right"))
 				){
 				//updates the timers
 				this.lastHit = this.now;
