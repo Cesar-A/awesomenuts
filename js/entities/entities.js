@@ -303,7 +303,7 @@ game.PlayerEntity = me.Entity.extend({
 				this.lastHit = this.now;
 				return true;
 			}
-			//if the attack check is false it will return false
+			//if the attack check is false it will return falsesdazC
 			return false;
 	},
 	hitCreep: function  (response) {
