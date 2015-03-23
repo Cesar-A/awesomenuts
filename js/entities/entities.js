@@ -142,7 +142,9 @@ game.PlayerEntity = me.Entity.extend({
 		//orgainzes update function
 		this.attacking = me.input.isKeyPressed("attack");
 	},
+     //fixing source tree errors
 
+     
 	//organizes code
 	//linked to pressandmove fucntion
 	moveRight: function(){
