@@ -1,101 +1,127 @@
-//removes the player and resets him if he dies
-//adds gold
-//manages creeps
+//Game Manager is an object not the same as player entity
 game.GameTimerManager = Object.extend({
 	init: function(x, y, settings){
 		this.now = new Date().getTime();
 		this.lastCreep = new Date().getTime();
-		//creepe cannot pause at all
-		this.paused = false;
+                //pause our game or pause screen
+                this.pause = false;
+
 		this.alwaysUpdate = true;
+
 	},
 
 	update: function(){
-		this.now = new Date().getTime();
-		this.goldTimerCheck();
-		this.creepTimerCheck();
-
-		return true;
-	},
-	//organizes code above
-	goldTimerCheck: function(){
-		//controls when the creep spons
-		if(Math.round(this.now/1000)%20 ===0 && (this.now - this.lastCreep >= 1000)){
-			game.data.gold += 1;
-			console.log("Current gold: " + game.data.gold);
-
-		}
-	},
-	creepTimerCheck: function(){
-		//controls when the creep spons
-		if(Math.round(this.now/1000)%10 ===0 && (this.now - this.lastCreep >= 1000)){
-			//controls when the creep spons
-			this.lastCreep = this.now;
-			//bulids a creep and puts it into the world
-			var creepe = me.pool.pull("EnemyCreep", 1000, 0, {});
-			me.game.world.addChild(creepe, 5);
-
-			//var creepe1 = me.pool.pull("Player2", 1000, 0, {});
-			//me.game.world.addChild(creepe, 5);
-
-		}
+		this.now = new Date().getTime(); 
+                
+                this.goldTimerCheck();    
+                this.creepTimerCheck();  
+        },
+                
+ //**********goldTimerCheck****************************************************
+ 
+    goldTimerCheck: function(){
+        //creep timer, get gold every other kill creep
+         if(Math.round(this.now/1000) % 20 === 0 && (this.now - this.lastCreep >= 1000)){
+         //add a gold every time we kill a creep
+         game.data.gold += 1;
+         console.log("Current gold: " + game.data.gold);
+         }
+    },
+    
+    creepTimerCheck: function(){
+        if(Math.round(this.now/1000) % 10 === 0 && (this.now - this.lastCreep >= 1000)){
+	this.lastCreep = this.now;
+	var creepe = me.pool.pull("EnemyCreep", 1000, 0, {});
+	me.game.world.addChild(creepe, 5);
 	}
+        return true;
+    },           
 });
 
-//manages the players death
-//oragnizes the code
 game.HeroDeathManager = Object.extend({
-	init: function(x, y, settings){
-		this.alwaysUpdate = true;
+   init: function(x, y, settings){
+       this.alwaysUpdate = true;
+   },
+    
+    update: function(){
+       //check to see if the player is dead
+       if(game.data.player.dead){
+          //every you die you'll start at the top left of the screen  
+          me.game.world.removeChild(game.data.player);
+          //change the x to 10 and y to 0 after resetting
+          //using the play.js(current state) and looking for the resetPlayer function
+          me.state.current().resetPlayer(10, 0);
+       }     
+       return true;
+    }   
+ });
+ 
+ game.ExperienceManager = Object.extend({
+     init: function(x, y, settings){
+        this.alwaysUpdate = true; 
+        this.gameover = false;
+     },
+     
+     update: function(){
+         if(game.data.win === true && !this.gameover){
+             this.gameOver(true);
+         }
+         else if(game.data.win === false && !this.gameover){
+             this.gameOver(false);
+         }    
+         //console.log("experience" + game.data.exp);
+                 
+         return true;
+      },
+      
+ //***********gameOver refactoring********************************************
+ 
+    gameOver: function(win){
+        if(win){
+            game.data.exp += 10;
+        }
+        else{
+            game.data.exp += 1;
+        }
+        this.gameover = true;
+        me.save.exp = game.data.exp;
+        //testing purpose only
+        me.save.exp = 4;
+    }      
+ });
 
-	},
-
-	update: function(){
-		//dead function in game manager
-		if(game.data.player.dead){
-			me.game.world.removeChild(game.data.player);
-			me.state.current().resetPlayer(10, 0);
-		}
-		return true;
-	}
-});
-
-//gains the player expeience if they win 
-game.ExperienceManager = Object.extend({
-	init: function (x, y, settings) {
-		this.alwaysUpdate = true;
-		this.gameOver = false;
-	},
-
-	update: function(){
-		if(game.data.win === true && !this.gameOver){
-			//the game is over when the player dies
-			this.gameOver(true);
-		}else if(game.data.win === false && !this.gameOver){
-			this.gameOver(false);
-			//this.gameOver = true;
-			//saves current game variable
-			//me.save.exp = game.data.exp;
-		}
-		console.log(game.data.exp);
 
 
-		return true;
-	},
-	//organizes update function
-	//game over function
-	gameOver: function(win){
-		if(win){
-			game.data.exp += 10;
-		}else{
-			game.data.exp += 1;
-		}
-		    
-			this.gameOver = true;
-			//saves the 5 exp variables in game.js
-			me.save.exp = game.data.exp;
-	}
-});
 
-       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
