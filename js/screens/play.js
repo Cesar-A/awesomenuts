@@ -8,7 +8,7 @@ game.PlayScreen = me.ScreenObject.extend({
 
 		//console log for experience and experience2 variables
 		console.log(game.data.exp);
-		console.log(game.data.exp2);
+		console.log(game.data.exp2u);
 
 		//loads the proper level within game
 		me.levelDirector.loadLevel("level01");
@@ -58,7 +58,7 @@ game.PlayScreen = me.ScreenObject.extend({
 		me.input.bindKey(me.input.KEY.LEFT, "left");
 		//binds space bar for jump
 		me.input.bindKey(me.input.KEY.SPACE, "jump");
-		//binds A key for attack
+		//binds A key for attac
 		me.input.bindKey(me.input.KEY.A, "attack");
 		// add our HUD to the game world
 		this.HUD = new game.HUD.Container();
